@@ -15,7 +15,7 @@ else
     git clone $REPO_GIT $REPO_NAME
 fi
 
-for fi in $PACKAGE_FOLDER/*.tar.gz; do
+for fi in $PACKAGE_FOLDER/libev-*.tar.gz; do
 	# remove path prefix
 	FILENAME=${fi//"${PACKAGE_FOLDER}\/"/""}
 	# get folder name (folder that is created from archive extraction)
@@ -45,7 +45,7 @@ for fi in $PACKAGE_FOLDER/*.tar.gz; do
     # commit new version files to the repo
     cd $REPO_NAME
     git add .
-	git commit -m "$VERSION"
+	git commit -m "version $VERSION"
 	git tag v$VERSION
 	git push origin master
 	git push --tags origin
