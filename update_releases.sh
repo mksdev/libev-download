@@ -1,7 +1,7 @@
 #!/bin/zsh
 
-REPO_NAME=libev
-REPO_GIT=git@github.com:mksdev/libev.git
+REPO_NAME=libev-release
+REPO_GIT=git@github.com:mksdev/libev-release.git
 
 # wget download folder
 PACKAGE_FOLDER=dist.schmorp.de/libev/Attic
@@ -25,6 +25,7 @@ for fi in $PACKAGE_FOLDER/libev-*.tar.gz; do
 	#echo $VERSION
 	echo "[$fi] processing $FILENAME, folder $FOLDER, version $VERSION"
 
+    # check if we already pushed this version into git
 	cd $REPO_NAME
 	if git rev-parse v$VERSION >/dev/null 2>&1
 	then
@@ -35,19 +36,18 @@ for fi in $PACKAGE_FOLDER/libev-*.tar.gz; do
 	# remove all files from repository
 	git rm -r *
 	cd ..
-
+	
 	# extract package, this will extract package into current directory 
 	# (not directory in which package is located) 
 	tar -zxf $fi
 	cp ./$FOLDER/* ./$REPO_NAME
 	rm -rf ./$FOLDER
-
+	
 	# commit new version files to the repo
 	cd $REPO_NAME
 	git add .
 	git commit -m "version $VERSION"
 	git tag v$VERSION
-	git push origin master
-	git push --tags origin
+	git push --all
 	cd ..
 done
