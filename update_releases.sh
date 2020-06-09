@@ -17,14 +17,13 @@ fi
 
 for fi in $PACKAGE_FOLDER/libev-*.tar.gz; do
 	# remove path prefix
-	FILENAME=${fi//"${PACKAGE_FOLDER}\/"/""}
+	FILENAME=${fi/${PACKAGE_FOLDER}\//""}
 	# get folder name (folder that is created from archive extraction)
-	FOLDER=${FILENAME//".tar.gz"/""}
+	FOLDER=${FILENAME/".tar.gz"/""}
 	#echo $FOLDER
-	VERSION=${FOLDER//"libev-"/""}
+	VERSION=${FOLDER/"libev-"/""}
 	#echo $VERSION
 	echo "[$fi] processing $FILENAME, folder $FOLDER, version $VERSION"
-
     # check if we already pushed this version into git
 	cd $REPO_NAME
 	if git rev-parse v$VERSION >/dev/null 2>&1
