@@ -17,4 +17,5 @@ fi
 cd $REPO_NAME
 crap-clone :pserver:anonymous@cvs.schmorp.de/schmorpforge libev
 git push --all
+git push --tags origin
 cd ..

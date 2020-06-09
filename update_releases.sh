@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/bin/bash
 
 REPO_NAME=libev-release
 REPO_GIT=git@github.com:mksdev/libev-release.git
@@ -48,6 +48,7 @@ for fi in $PACKAGE_FOLDER/libev-*.tar.gz; do
 	git add .
 	git commit -m "version $VERSION"
 	git tag v$VERSION
-	git push --all
+	git push origin master
+	git push --tags origin
 	cd ..
 done
