@@ -10,9 +10,13 @@ if [ -d "./$REPO_NAME" ]
 then
 	cd $REPO_NAME
 	git pull
+	git fetch --tags
 	cd ..
 else
 	git clone $REPO_GIT $REPO_NAME
+	cd $REPO_NAME
+	git fetch --tags
+	cd ..
 fi
 
 for fi in $PACKAGE_FOLDER/libev-*.tar.gz; do
